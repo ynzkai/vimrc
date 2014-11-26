@@ -158,3 +158,25 @@ function! AlignAssignments ()
         let linenum += 1
     endfor
 endfunction
+
+" auto close html tag
+function! CloseTag()
+	let current_line = getline('.')
+	let lnum = line('.')
+	normal F<
+	let acol = col('.')
+	if current_line[col('.')] == '>'
+		let	bcol = getpos('.')
+	else
+		normal f>
+		let bcol = col('.')
+	endif
+	if acol && bcol
+		let tag = strpart(current_line, acol, bcol-acol-1)
+		let newline = strpart(current_line, 0, bcol+1) . '</' . tag . '>' . strpart(current_line, bcol+1)
+		call setline(lnum, newline)
+	endif
+endfunction
+
+autocmd FileType html imap <silent> <leader><Tab> <esc>:call CloseTag()<cr>a
+autocmd FileType html imap <silent> <leader><cr> <esc>:call CloseTag()<cr>a<cr><c-k>
