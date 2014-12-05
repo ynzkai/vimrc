@@ -163,20 +163,38 @@ endfunction
 function! CloseTag()
 	let current_line = getline('.')
 	let lnum = line('.')
+
+	" find '<' pos
 	normal F<
 	let acol = col('.')
+
+	" find space pos
+	let scol = match(current_line, ' ', acol) + 1
+
+	" find '>' pos
 	if current_line[col('.')] == '>'
-		let	bcol = getpos('.')
+		let bcol = getpos('.')
+		" save close tag pos
+		let ecol = bcol
 	else
 		normal f>
 		let bcol = col('.')
+		" save close tag pos
+		let ecol = bcol
 	endif
+
+	" get tag start and end pos
+	if scol != 0 && scol < bcol
+		let bcol = scol
+	endif
+
 	if acol && bcol
 		let tag = strpart(current_line, acol, bcol-acol-1)
-		let newline = strpart(current_line, 0, bcol+1) . '</' . tag . '>' . strpart(current_line, bcol+1)
+		let newline = strpart(current_line, 0, ecol) . '</' . tag . '>' . strpart(current_line, ecol)
 		call setline(lnum, newline)
 	endif
 endfunction
 
+" set hotkeys of CloseTag function
 autocmd FileType html imap <silent> <leader><Tab> <esc>:call CloseTag()<cr>a
 autocmd FileType html imap <silent> <leader><cr> <esc>:call CloseTag()<cr>a<cr><c-k>
