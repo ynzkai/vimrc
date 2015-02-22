@@ -45,6 +45,8 @@ set nowrap
 "set laststatus=2
 set ttimeoutlen=50
 
+set pastetoggle=<F2>
+
 
 set autoindent
 set smartindent
@@ -198,3 +200,5 @@ endfunction
 " set hotkeys of CloseTag function
 autocmd FileType html imap <silent> <leader><Tab> <esc>:call CloseTag()<cr>a
 autocmd FileType html imap <silent> <leader><cr> <esc>:call CloseTag()<cr>a<cr><c-k>
+autocmd FileType erb imap <silent> <leader><Tab> <esc>:call CloseTag()<cr>a
+autocmd FileType erb imap <silent> <leader><cr> <esc>:call CloseTag()<cr>a<cr><c-k>
