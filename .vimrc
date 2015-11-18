@@ -5,6 +5,7 @@ autocmd FileType text setlocal textwidth=78
 
 "enable pathogen plugin
 "execute pathogen#infect()
+execute pathogen#infect()
 
 "************************************
 autocmd vimenter * if !argc() | NERDTree | endif
