@@ -1,10 +1,10 @@
+
 syntax on
 filetype plugin indent on
 
 autocmd FileType text setlocal textwidth=78
 
 "enable pathogen plugin
-"execute pathogen#infect()
 execute pathogen#infect()
 
 "************************************
