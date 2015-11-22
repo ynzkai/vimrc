@@ -85,6 +85,8 @@ inoremap () ()<Left>
 inoremap <> <><Left>
 inoremap {} {}<Left>
 inoremap [] []<Left>
+" 输入当前时间
+inoremap <leader>t <C-r>=strftime("%F %H:%M:%S")<cr>
 
 " Quickly set comma or semicolon at the end of the string
 inoremap ,, <End>,
