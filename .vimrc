@@ -31,6 +31,7 @@ map <C-n> :NERDTreeToggle<CR>
 "autocmd FocusLost * call Autosave() 
 "************************************
 
+set go=
 color desert
 set nocompatible
 set nobackup
@@ -206,3 +207,27 @@ autocmd FileType html imap <silent> <leader><Tab> <esc>:call CloseTag()<cr>a
 autocmd FileType html imap <silent> <leader><cr> <esc>:call CloseTag()<cr>a<cr><c-k>
 autocmd FileType erb imap <silent> <leader><Tab> <esc>:call CloseTag()<cr>a
 autocmd FileType erb imap <silent> <leader><cr> <esc>:call CloseTag()<cr>a<cr><c-k>
+
+" insert html framework automatically
+autocmd BufNewFile *.html exec ":call SetTitle()" 
+
+func SetTitle()
+	if &filetype == 'html'
+		call setline(1, '<!DOCTYPE html>')
+		call append(line("$"), '<html lang=en>')
+		call append(line("$"), '<head>')
+		call append(line("$"), '  <title></title>')
+		call append(line("$"), '  <meta charset="utf-8">')
+		call append(line("$"), '  <meta http-equiv="X-UA-Compatible" content="IE=edge">')
+		call append(line("$"), '  <meta name="author" content="">')
+		call append(line("$"), '  <meta name="description" content="">')
+		call append(line("$"), '  <meta name="keywords" content="">')
+		call append(line("$"), '  <meta name="viewport" content="width=device-width, initial-scale=1">')
+		call append(line("$"), '  <link rel="stylesheet" type="text/css" href="">')
+		call append(line("$"), '  <script type="text/javascript" src=""></script>')
+		call append(line("$"), '</head>')
+		call append(line("$"), '<body>')
+		call append(line("$"), '</body>')
+		call append(line("$"), '</html>')
+	endif
+endfunc
