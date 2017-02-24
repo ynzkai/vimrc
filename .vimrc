@@ -1,3 +1,6 @@
+"In some linux system, can't expand folds, add the following 2 lines to avoid this problem.
+set encoding=utf-8
+let g:NERDTreeDirArrows=0
 
 syntax on
 filetype plugin indent on
